@@ -58,6 +58,26 @@
               </div>
             </div>
           </section>
+          <section class="container counter-data min-h-372px">
+            <div class="row">
+                <div class="col-12 col-lg-4 text-center">
+                  <img class="promote-icon mb-2" src="{{url('assets/img/discussions.png')}}" alt="discussion">
+                  <h2>Discussions</h2>
+                  <p class="fs-3">12,345</p>
+                </div>
+                <div class="col-12 col-lg-4 text-center">
+                  <img class="promote-icon mb-2" src="{{url('assets/img/answers.png')}}" alt="answers">
+                  <h2>Answers</h2>
+                  <p class="fs-3">12,345</p>
+                </div>
+                <div class="col-12 col-lg-4 text-center">
+                  <img class="promote-icon mb-2" src="{{url('assets/img/users.png')}}" alt="users">
+                  <h2>Users</h2>
+                  <p class="fs-3">12,345</p>
+                </div>
+            </div>
+
+          </section>
           <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     </body>
 </html>
