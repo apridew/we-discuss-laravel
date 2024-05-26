@@ -10,6 +10,7 @@
         
     </head>
     <body class="antialiased">
+      <header>
         <nav class="navbar navbar-dark navbar-expand-lg bg-primary">
             <div class="container flex justify-content-between align-items-center">
               <a class="navbar-brand p-0 h-32px" href="{{route('home')}}">WeDiscuss</a>
@@ -45,18 +46,20 @@
               </div>
             </div>
           </nav>
-          <section class="container hero">
-            <div class="row align-items-center h-100">
-              <div class="col-12 col-lg-6">
-                <h1>WeDiscuss<br/> Technology Community Forum</h1>
-                <p class="mb-4">Empowering the technology community to connect, share and learn.</p>
-                  <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="#">Sign Up</a>
-                  <a class="btn btn-secondary mb-2 mb-lg-0" href="#">Join Discussions</a>
-              </div>
-              <div class="col-12 col-lg-6 text-center h-315px order-first order-lg-last mb-3 mb-lg-0 pt-2 pt-lg-4">
-                <img class="h-100 float-lg-end" src="{{url('assets/img/hero.png')}}" alt="hero">
-              </div>
+      </header>
+      <main>
+        <section class="container hero">
+          <div class="row align-items-center h-100">
+            <div class="col-12 col-lg-6">
+              <h1>WeDiscuss<br/> Technology Community Forum</h1>
+              <p class="mb-4">Empowering the technology community to connect, share and learn.</p>
+                <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="#">Sign Up</a>
+                <a class="btn btn-secondary mb-2 mb-lg-0" href="#">Join Discussions</a>
             </div>
+            <div class="col-12 col-lg-6 text-center h-315px order-first order-lg-last mb-3 mb-lg-0 pt-2 pt-lg-4">
+              <img class="h-100 float-lg-end" src="{{url('assets/img/hero.png')}}" alt="hero">
+            </div>
+          </div>
           </section>
           <section class="container counter-data min-h-372px">
             <div class="row">
@@ -161,6 +164,35 @@
               <a class="btn btn-secondary mb-2 mb-lg-0" href="#">Join Discussions</a>
             </div>
           </section>
+      </main>
+        <footer class="py-80px">
+          <div class="container">              
+            <div class="row">
+              <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                <a class="footer-title text-primary fs-2" href="{{route('home')}}">WeDiscuss</a>
+                <p class="text-white mt-4">Empowering the technology community <br/>to connect, share and learn.</p>
+              </div>
+              <div class="col-12 col-lg-6 me-auto">
+                <div class="d-flex flex-column flex-lg-row justify-content-end">
+                  <div class="d-flex flex-column me-140px mb-3 mb-lg-0">
+                    <p class="fw-bold fs-5 text-white">Contact Us</p>
+                    <ul class="list-unstyled">
+                      <li class="text-white"><a href="mailto:dewiapriyantiputra@gmail.com">info@wediscuss.com</a></li>
+                    </ul>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <p class="fw-bold fs-5 text-white">Links</p>
+                    <ul class="list-unstyled">
+                      <li class="text-white mb-2"><a href="{{route('home')}}">Home</a></li>
+                      <li class="text-white mb-2"><a href="#">Discussions</a></li>
+                      <li class="text-white mb-2"><a href="#">About Us</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
           <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     </body>
 </html>

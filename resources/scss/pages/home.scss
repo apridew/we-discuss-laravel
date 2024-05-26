@@ -8,6 +8,13 @@
     height: 100px;
 }
 
+.footer-title{
+    font-weight: 600;    
+    &:hover{
+        opacity: 0.75;
+    }
+}
+
 @include media-breakpoint-up(lg){
     .hero{
         padding-bottom: 144px; 
