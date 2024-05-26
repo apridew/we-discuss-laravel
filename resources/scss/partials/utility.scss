@@ -30,7 +30,6 @@
 
     &:hover {
         color: white;
-        background-color: transparent;
     }
 }
 
@@ -46,4 +45,22 @@
         background-color: white;
         color: $blue;
     }
+}
+
+.btn.btn-secondary {
+    background-color: white;
+    border-color: $blue;
+    color: $blue;
+    border-radius: 50px;
+    padding: 10px 24px;
+    min-width: 128px;
+
+    &:hover {
+        opacity: 0.75;
+        color: white;
+    }
+}
+
+.h-315px{
+    height: 315px;
 }
