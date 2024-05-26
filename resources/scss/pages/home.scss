@@ -3,13 +3,18 @@
     padding-bottom: 16px; 
 }
 
-@media screen and (min-width: 992px) {
+.promote-icon{
+    width: 100px;
+    height: 100px;
+}
+
+@include media-breakpoint-up(lg){
     .hero{
         padding-bottom: 144px; 
     }
-}
 
-.promote-icon{
-    width: 140px;
-    height: 140px;
+    .promote-icon{
+        width: 140px;
+        height: 140px;
+    }
 }
