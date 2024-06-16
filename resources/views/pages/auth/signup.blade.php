@@ -2,9 +2,24 @@
 
 @section('body')
     <section class="bg-gray vh-100">
-        <div class="container h-100 pt-5">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-3">
+        <div class="container">
+            <div class="row pt-5 justify-content-center">
+                <div class="col-12 col-lg-6 my-auto mb-5 mb-lg-auto me-0">
+                    <div class="d-none d-lg-block">
+                        <h2>Join WeDiscuss Community</h2>
+                        <p>
+                            <ul>
+                                <li>Stuck? Ask in the Discussions</li>
+                                <li> Get answers from experienced developers from around the world</li>
+                                <li>Contribute by answering questions</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="d-block d-lg-none w-100 text-center">
+                        Create your account in a minute. It's free.
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 h-100">
                     <a href="" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
                     <div class="card mb-4">
                         <form action="">
@@ -21,13 +36,17 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="username" autocomplete="off">
+                            </div>
                             <div class="mb-3 d-grid">
                                 <button type="submit" class="btn btn-primary rounded-2">Log In</button>
                             </div>
                         </form>
                     </div>
                     <div class="text-center">
-                        Don't have an account?<u><a href="/signup"> Sign Up</a></u>
+                        Already have an account?<u><a href="/login"> Log In</a></u>
                     </div>
                 </div>
             </div>

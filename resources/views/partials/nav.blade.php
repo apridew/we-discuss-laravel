@@ -20,7 +20,7 @@
             <form class="d-flex" role="search" action="#" method="GET">
               <div class="input-group">
                 <span class="input-group-text bg-white border-end-0"><img class="opacity-50" src="{{url('assets/img/search.png')}}" alt="search"></span>
-                <input class="form-control border-start-0 ps-0 " type="search" placeholder="Search" aria-label="Search" name="" value="">
+                <input class="form-control border-start-0 ps-0" type="search" placeholder="Search" aria-label="Search" name="" value="">
               </div>
             </form>
             <div class="d-flex flex-column flex-lg-row gap-2 ms-2 mt-2 mt-lg-0 ">

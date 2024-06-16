@@ -119,3 +119,7 @@ footer{
 .me-140px{
     margin-right: 140px;
 }
+
+.form-control:focus{
+    box-shadow: none;
+}
