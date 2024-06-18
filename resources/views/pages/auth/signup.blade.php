@@ -22,23 +22,33 @@
                 <div class="col-12 col-lg-3 h-100">
                     <a href="{{route('home')}}" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
                     <div class="card mb-4">
-                        <form action="">
+                        <form action="{{route('auth.signup.signup')}}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="name@example.com" autocomplete="off" autofocus>
+                                <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autocomplete="off" autofocus value="{{old('email')}}">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-4">
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group mb-3">
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="password" aria-label="Password" aria-describedby="password">
-                                    <span class="input-group-text" id="password">
+                                    <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" aria-label="Password" aria-describedby="password">
+                                    <span class="input-group-text  @error('password') border-danger rounded-end @enderror" id="password">
                                         <a href="javascript:;" id="password-toggle"><img id="password-toggle-img" src="{{url('assets/img/eye-slash.png')}}" alt="password"></a>
                                     </span>
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="username" autocomplete="off">
+                                <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="username" autocomplete="off value="{{old('username')}}">
+                                @error('username')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3 d-grid">
                                 <button type="submit" class="btn btn-primary rounded-2">Log In</button>

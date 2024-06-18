@@ -21,11 +21,9 @@ Route::namespace('App\Http\Controllers\Auth')->group(function () {
     Route::get('login', 'LoginController@show')->name('auth.login.show');
     Route::post('login', 'LoginController@login')->name('auth.login.login');
     Route::post('logout', 'LoginController@logout')->name('auth.login.logout');
+    Route::get('signup', 'SignUpController@show')->name('auth.signup.show');
+    Route::post('signup', 'SignUpController@signup')->name('auth.signup.signup');
 });
-
-Route::get('signup', function () {
-    return view('pages.auth.signup');
-})->name('auth.signup.show');
 
 Route::get('discussions', function () {
     return view('pages.discussions.index');
