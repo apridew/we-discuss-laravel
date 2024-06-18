@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                 <div class="d-flex mb-4">
-                    <div class="avatar-wrapper rounded-circle overflow-hidden flex-shrink-0 me-4">
-                        <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="avatar-wrapper">
+                    <div class="avatar-wrapper rounded-circle overflow-hidden flex-shrink-0 me-4 bg-white">
+                        <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid">
                     </div>
                     <div class="mb-4">
                         <div class="fs-2 fw-bold mb-1 lh-1 text-break">
@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <input type="text" id="current-url" class="d-none" value="{{ request()->url()}}">
-                    <a href="javascript:;" class="btn btn-primary me-4" id="share-profile">Share</a>
+                    <a href="javascript:;" class="btn btn-primary rounded-3 me-4" id="share-profile">Share</a>
                 </div>
             </div>
             <div class="col-12 col-lg-8">

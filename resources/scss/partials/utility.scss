@@ -142,3 +142,11 @@ pre {
     height: 128px;
     width: 128px;
 }
+
+.cancel-btn{
+    color: $gray-500;
+    &:hover{
+        color: rgba(236, 95, 95, 0.815);
+        font-weight: 500;
+    }
+}

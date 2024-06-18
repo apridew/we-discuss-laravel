@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-primary rounded-2 me-4">Post</button>
-                                        <a href="">Cancel</a>
+                                        <a href="" class="cancel-btn">Cancel</a>
                                     </div>
                                 </form>
                             </div>
