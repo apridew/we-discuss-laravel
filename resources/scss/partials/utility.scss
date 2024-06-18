@@ -129,12 +129,6 @@ footer{
     width: 32px;
 }
 
-.card-discussion{
-    a:hover{
-        color: $blue;
-    }
-}
-
 pre {
     padding: 12px;
     font-size: 14px;
@@ -142,4 +136,9 @@ pre {
     border: 1px solid #eaecf0;
     border-radius: 6px;
     color: #68747f;
+}
+
+.avatar-wrapper{
+    height: 128px;
+    width: 128px;
 }

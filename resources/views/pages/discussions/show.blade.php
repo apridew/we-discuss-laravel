@@ -147,6 +147,10 @@
 
                 let alertContainer = alert.find(".container")
                 alertContainer.first().text('Share link discussion copied successfully')
+
+                setTimeout(function() {
+                    alert.addClass("d-none");
+                }, 1500);
              })
         })
     </script>
