@@ -8,10 +8,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item d-block d-lg-none d-xl-block">
-                <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+                <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : ''}}" aria-current="page" href="{{route('home')}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{route('home')}}">Discussions</a>
+                <a class="nav-link {{ Route::currentRouteName() == 'discussions.index' ? 'active' : ''}}" aria-current="page" href="{{route('discussions.index')}}">Discussions</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{route('home')}}">About Us</a>
@@ -25,10 +25,10 @@
             </form>
             <div class="d-flex flex-column flex-lg-row gap-2 ms-2 mt-2 mt-lg-0 ">
               <button class="btn btn-primary ps-1 pe-0">
-                <a class="nav-link text-nowrap" href="#">Log In</a>
+                <a class="nav-link text-nowrap" href="{{route("auth.login.show")}}">Log In</a>
               </button>
               <button class="btn btn-primary-white ps-1 pe-0">
-                <a class="nav-link text-nowra" href="#">Sign Up</a>
+                <a class="nav-link text-nowra" href="{{route("auth.signup.show")}}">Sign Up</a>
               </button>
             </div>
           </div>

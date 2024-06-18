@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fw-bold text-center">Please <span class="text-primary"><a href="/login">sign in</a></span> or <span class="text-primary"><a href="/signup">create an account</a></span> to participate in this discussion.
+                    <div class="fw-bold text-center">Please <span class="text-primary"><a href="{{route('auth.login.show')}}">sign in</a></span> or <span class="text-primary"><a href="{{route('auth.signup.show')}}">create an account</a></span> to participate in this discussion.
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">

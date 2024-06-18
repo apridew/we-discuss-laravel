@@ -5,7 +5,7 @@
         <div class="container h-100 pt-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-3">
-                    <a href="" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
+                    <a href="{{route('home')}}" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
                     <div class="card mb-4">
                         <form action="">
                             <div class="mb-3">
@@ -27,7 +27,7 @@
                         </form>
                     </div>
                     <div class="text-center">
-                        Don't have an account?<u><a href="/signup"> Sign Up</a></u>
+                        Don't have an account?<u><a href="{{route('auth.signup.show')}}"> Sign Up</a></u>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-lg-3 h-100">
-                    <a href="" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
+                    <a href="{{route('home')}}" class="nav-link mb-4 text-center fs-3 text-primary fw-bold spa">WeDiscuss</a>
                     <div class="card mb-4">
                         <form action="">
                             <div class="mb-3">
@@ -46,7 +46,7 @@
                         </form>
                     </div>
                     <div class="text-center">
-                        Already have an account?<u><a href="/login"> Log In</a></u>
+                        Already have an account?<u><a href="{{route('auth.login.show')}}"> Log In</a></u>
                     </div>
                 </div>
             </div>
