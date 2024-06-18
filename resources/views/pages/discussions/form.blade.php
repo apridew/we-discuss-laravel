@@ -17,27 +17,40 @@
                     <div class="card card-discussion mb-5">
                         <div class="row">
                             <div class="col-12">
-                                <form action="" method="POST">
+                                <form action="{{route('discussions.store')}}" method="POST">
+                                    @csrf
                                     <div class="mb-3">
                                         <label for="title" class="form-label fw-bold">Title</label>
-                                        <input type="text" class="form-control" id="title" name="title" autofocus>
+                                        <input type="text" class="form-control  @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title')}}" autofocus>
+                                        @error('title')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="category_slug" class="form-label fw-bold">Category</label>
-                                        <select name="category_slug" id="category_slug" class="form-select">
-                                            <option value="">Select Category</option>
-                                            <option value="">Mock1</option>
-                                            <option value="">Mock2</option>
-                                            <option value="">Mock3</option>
+                                        <select name="category_slug" id="category_slug" class="form-select @error('category_slug') is-invalid @enderror">
+                                            <option value="">--Select Category--</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->slug }}"
+                                                    @if (old('category_slug') == $category->slug){{ 'selected' }} @endif>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        @error('category_slug')
+                                            <div class="invalid-feedback">Please select a category.</div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label fw-bold">Question</label>
-                                        <textarea name="content" class="form-control" id="content" cols="30" rows="10"></textarea>
+                                        <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" cols="30" rows="10">{{old('content')}}</textarea>
+                                        @error('content')
+                                            <div class="invalid-feedback">Content is required.</div>
+                                        @enderror
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-primary rounded-2 me-4">Post</button>
-                                        <a href="" class="cancel-btn">Cancel</a>
+                                        <a href="{{route('discussions.index')}}" class="cancel-btn">Cancel</a>
                                     </div>
                                 </form>
                             </div>
