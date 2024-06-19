@@ -6,10 +6,8 @@
             <div class="mb-4">
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h2 class="me-4 mb-0">
-                        @if (isset($search)) 
-                        {{"Search result for \"$search\""}}
-                        @else {{ 'All Discussions'}}
-                        @endif
+                        @if (isset($search)) {{"Search result for \"$search\""}}@else {{ 'All Discussions'}}@endif
+                        <span>{{isset($withCategory) ? 'About ' . $withCategory->name: ""}}</span>
                     </h2>
                     <div>
                         {{$discussions->total() . " " 
@@ -46,7 +44,7 @@
                                     <p>{!!$discussion->content_preview!!}</p>
                                     <div class="row">
                                         <div class="col me-1 me-lg-2">
-                                            <a href="">
+                                            <a href="{{ route('discussions.categories.show', $discussion->category->slug) }}">
                                                 <span class="badge rounded-pill text-bg-light">{{$discussion->category->name}}</span>
                                             </a>
                                         </div>
@@ -78,11 +76,11 @@
                         <div class="card">
                             <h3>All Categories</h3>
                             <div>
-                                <a href="">
-                                    @foreach ($categories as $category)
+                                @foreach ($categories as $category)
+                                <a href="{{route('discussions.categories.show', $category->slug)}}">
                                         <span class="badge rounded-pill text-bg-light">{{$category->name}}</span>
-                                    @endforeach
                                 </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
