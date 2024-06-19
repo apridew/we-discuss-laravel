@@ -17,10 +17,12 @@
                 <a class="nav-link" aria-current="page" href="{{route('home')}}">About Us</a>
               </li>
             </ul>
-            <form class="d-flex" role="search" action="#" method="GET">
+            <form class="d-flex" role="search" action="{{route('discussions.index')}}" method="GET">
               <div class="input-group">
-                <span class="input-group-text bg-white border-end-0"><img class="opacity-50" src="{{url('assets/img/search.png')}}" alt="search"></span>
-                <input class="form-control border-start-0 ps-0" type="search" placeholder="Search" aria-label="Search" name="" value="">
+                <span class="input-group-text bg-white border-end-0">
+                  <img class="opacity-50" src="{{url('assets/img/search.png')}}" alt="search">
+                </span>
+                <input class="form-control border-start-0 ps-0" type="search" placeholder="Search" aria-label="Search" name="search" value="{{$search ?? ''}}">
               </div>
             </form>
             @auth
