@@ -7,15 +7,24 @@
                 <div class="mb-3 d-flex align-items-center justify-content-between">
                     <h2 class="me-4 mb-0">All Discussions</h2>
                     <div>
-                        12,345 discussion
+                        {{$discussions->total() . " " 
+                        . Str::plural('Discussion', $discussions->total())}}
                     </div>
                 </div>
+                @guest
                 <div class="mb-4">
                     <a class="btn btn-primary" href="{{route('auth.login.show')}}">Log In to Create Discussion</a>
                 </div>
+                @endguest
+                @auth
+                <div class="mb-4">
+                    <a class="btn btn-primary" href="{{route('discussions.create')}}">Create Discussion</a>
+                </div>
+                @endauth
                 <div class="row">
                     <div class="col-12 col-lg-8 mb-5 mb-lg-0">
-                        <div class="card card-discussion">
+                        @forelse ($discussions as $discussion)
+                            <div class="card card-discussion">
                             <div class="row">
                                 <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
                                     <div class="text-nowrap me-2 me-lg-0">
@@ -26,112 +35,46 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-10">
-                                    <a href="{{route('discussions.show')}}">
-                                        <h3>How to add a custom validation in Laravel?</h3>
+                                    <a href="{{route('discussions.show', $discussion->slug)}}">
+                                        <h3>{{$discussion->title}}</h3>
                                     </a>
-                                    <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "...</p>
+                                    <p>{{$discussion->content_preview}}</p>
                                     <div class="row">
                                         <div class="col me-1 me-lg-2">
                                             <a href="">
-                                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
+                                                <span class="badge rounded-pill text-bg-light">{{$discussion->category->name}}</span>
                                             </a>
                                         </div>
                                         <div class="col-5 col-lg-4">
                                             <div class="avatar-sm-wrapper d-inline-block">
-                                                <a href="" class="me-1">
-                                                    <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid rounded-circle">
+                                                <a href="{{route('users.show', $discussion->user->username)}}" class="me-1">
+                                                    <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
+                                                    ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle">
                                                 </a>
                                             </div>
                                             <span class="fs-12px">
-                                                <a href="" class="me-4 fw-bold">apridew</a>
-                                                <span>8 hours ago</span>
+                                                <a href="{{route('users.show', $discussion->user->username)}}" class="me-4 fw-bold">{{$discussion->user->username}}</a>
+                                                <span>{{$discussion->created_at->diffForHumans()}}</span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card card-discussion">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        5 Likes
-                                    </div>
-                                    <div class="text-nowrap color-gray">
-                                        11 Answers
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-10">
-                                    <a href="">
-                                        <h3>How to add a custom validation in Laravel?</h3>
-                                    </a>
-                                    <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "...</p>
-                                    <div class="row">
-                                        <div class="col me-1 me-lg-2">
-                                            <a href="">
-                                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-5 col-lg-4">
-                                            <div class="avatar-sm-wrapper d-inline-block">
-                                                <a href="" class="me-1">
-                                                    <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid rounded-circle">
-                                                </a>
-                                            </div>
-                                            <span class="fs-12px">
-                                                <a href="" class="me-4 fw-bold">apridew</a>
-                                                <span>8 hours ago</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>                            
+                        @empty
+                            <div class="card card-discussion">
+                                Currently no discussion yet
                             </div>
-                        </div>
-                        <div class="card card-discussion">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        5 Likes
-                                    </div>
-                                    <div class="text-nowrap color-gray">
-                                        11 Answers
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-10">
-                                    <a href="">
-                                        <h3>How to add a custom validation in Laravel?</h3>
-                                    </a>
-                                    <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "...</p>
-                                    <div class="row">
-                                        <div class="col me-1 me-lg-2">
-                                            <a href="">
-                                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-5 col-lg-4">
-                                            <div class="avatar-sm-wrapper d-inline-block">
-                                                <a href="" class="me-1">
-                                                    <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid rounded-circle">
-                                                </a>
-                                            </div>
-                                            <span class="fs-12px">
-                                                <a href="" class="me-4 fw-bold">apridew</a>
-                                                <span>8 hours ago</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="card">
                             <h3>All Categories</h3>
                             <div>
                                 <a href="">
-                                    <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                    <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                    <span class="badge rounded-pill text-bg-light">Eloquent</span>
+                                    @foreach ($categories as $category)
+                                        <span class="badge rounded-pill text-bg-light">{{$category->name}}</span>
+                                    @endforeach
                                 </a>
                             </div>
                         </div>

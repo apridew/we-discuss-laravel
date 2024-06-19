@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-primary rounded-2 me-4">Post</button>
-                                        <a href="{{route('discussions.index')}}" class="cancel-btn">Cancel</a>
+                                        <a href="{{route('discussions.index')}}" class="color-gray">Cancel</a>
                                     </div>
                                 </form>
                             </div>

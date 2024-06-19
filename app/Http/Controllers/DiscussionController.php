@@ -15,7 +15,12 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        //
+        $discussions = Discussion::with('user', 'category');
+
+        return response()->view('pages.discussions.index', [
+            'discussions' => $discussions->orderBy('created_at', 'desc')
+            ->paginate(10),
+            'categories' => Category::all(),]);
     }
 
     /**
@@ -42,7 +47,8 @@ class DiscussionController extends Controller
 
         $stripContent = strip_tags($validated['content']);
         $isContentLong = strlen($stripContent) > 120;
-        $validated['content_preview'] = $isContentLong ? substr($stripContent['content'], 0, 120) . '...' : $stripContent;
+        $validated['content_preview'] = $isContentLong 
+            ? (substr($stripContent, 0, 120) . '...') : $stripContent;
 
         $create = Discussion::create($validated);
 

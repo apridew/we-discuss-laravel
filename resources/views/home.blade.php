@@ -6,7 +6,9 @@
       <div class="col-12 col-lg-6">
         <h1>WeDiscuss<br/> Technology Community Forum</h1>
         <p class="mb-4">Empowering the technology community to connect, share and learn.</p>
-          <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="{{route('auth.signup.show')}}">Sign Up</a>
+        @guest
+          <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="{{route('auth.signup.show')}}">Sign Up</a>  
+        @endguest
           <a class="btn btn-secondary mb-2 mb-lg-0" href="{{route('discussions.index')}}">Join Discussions</a>
       </div>
       <div class="col-12 col-lg-6 text-center h-315px order-first order-lg-last mb-3 mb-lg-0 pt-2 pt-lg-4">
@@ -113,7 +115,9 @@
       <h2>Ready to get started?</h2>
       <p class="mb-4">Want to make a big impact?</p>
       <div class="text-center">
-        <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="{{route('auth.signup.show')}}">Sign Up</a>
+        @guest
+          <a class="btn btn-primary me-2 mb-2 mb-lg-0" href="{{route('auth.signup.show')}}">Sign Up</a>
+        @endguest
         <a class="btn btn-secondary mb-2 mb-lg-0" href="{{route('discussions.index')}}">Join Discussions</a>
       </div>
     </section>
