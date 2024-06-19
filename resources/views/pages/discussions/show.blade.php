@@ -9,7 +9,7 @@
                         <div class="fs-2 fw-bold me-2 color-gray mb-0">Disscussions</div>
                         <div class="fs-2 fw-bold me-2 color-gray mb-0">></div>
                     </div>
-                    <h2 class="mb-0">How to add a custom validation in laravel?</h2>
+                    <h2 class="mb-0">{{ $discussion->title }}</h2>
                 </div>
             </div>
             <div class="row">
@@ -23,31 +23,32 @@
                                 <span class="fs-4 color-gray mb-0">12</span>
                             </div>
                             <div class="col-11">
-                                <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "user", "admin", "moderator" and "author". I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "user", "admin", "moderator" and "author". I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "user", "admin", "moderator" and "author". I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "user", "admin", "moderator" and "author". I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "user", "admin", "moderator" and "author".</p>
+                                <p>{!! $discussion->content !!}</p>
                             </div>
                             <div class="mb-3">
-                                <a href="">
-                                    <span class="badge rounded-pill text-bg-light">Eloquent</span>
+                                <a href="{{ route('discussions.categories.show', $discussion->category->slug) }}">
+                                    <span class="badge rounded-pill text-bg-light">{{ $discussion->category->slug }}</span>
                                 </a>
                             </div>
                             <div class="row align-items-center justify-content-between">
                                 <div class="col">
                                     <span class="color-gray ms-2">
                                         <a href="javascript:;" id="share-discussion">Share</a>
-                                        <input type="text" value={{url('/discussions/lorem')}} id="current-url" class="d-none">
+                                        <input type="text" value={{ route('discussions.show', $discussion->slug) }} id="current-url" class="d-none">
                                     </span>
                                 </div>
                                 <div class="col-5 col-lg-3 d-flex justify-content-end">
                                     <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
-                                        <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="avatar">
+                                        <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
+                                        ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="avatar" class="avatar">
                                     </a>
                                     <div class="fs-12px lh-1">
                                         <span class="text-primary">
                                             <a href="" class="fw-bold d-flex align-items-start text-break mb-1">
-                                                apridew
+                                                {{ $discussion->user->username }}
                                             </a>
                                         </span>
-                                        <span class="color-gray">8 hours ago</span>
+                                        <span class="color-gray">{{ $discussion->created_at->diffForHumans()}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -112,18 +113,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fw-bold text-center">Please <span class="text-primary"><a href="{{route('auth.login.show')}}">sign in</a></span> or <span class="text-primary"><a href="{{route('auth.signup.show')}}">create an account</a></span> to participate in this discussion.
-                    </div>
+                    @guest
+                        <div class="fw-bold text-center">Please <span class="text-primary"><a href="{{route('auth.login.show')}}">sign in</a></span> or <span class="text-primary"><a href="{{route('auth.signup.show')}}">create an account</a></span> to participate in this discussion.
+                        </div>
+                    @endguest
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="card">
                         <h3>All Categories</h3>
                         <div>
-                            <a href="">
-                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
+                            @foreach ($categories as $category)    
+                            <a href="{{ route('discussions.categories.show', $category->slug)}}">
+                                <span class="badge rounded-pill text-bg-light">{{ $category->name }}</span>
                             </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

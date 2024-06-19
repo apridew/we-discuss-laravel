@@ -41,10 +41,6 @@ Route::namespace('App\Http\Controllers\Auth')->group(function () {
     Route::post('signup', 'SignUpController@signup')->name('auth.signup.signup');
 });
 
-Route::get('discussions/lorem', function () {
-    return view('pages.discussions.show');
-})->name('discussions.show');
-
 Route::get('answers/1', function () {
     return view('pages.answers.form');
 })->name('answers.edit');
