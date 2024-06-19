@@ -43,7 +43,7 @@
                                     <a href="{{route('discussions.show', $discussion->slug)}}">
                                         <h3>{{$discussion->title}}</h3>
                                     </a>
-                                    <p>{{$discussion->content_preview}}</p>
+                                    <p>{!!$discussion->content_preview!!}</p>
                                     <div class="row">
                                         <div class="col me-1 me-lg-2">
                                             <a href="">
@@ -71,6 +71,8 @@
                                 Currently no discussion yet
                             </div>
                         @endforelse
+
+                        {{$discussions->links()}}
                     </div>
                     <div class="col-12 col-lg-4">
                         <div class="card">
