@@ -33,15 +33,23 @@
                             </div>
                             <div class="row align-items-center justify-content-between">
                                 <div class="col">
-                                    <span class="color-gray ms-2">
-                                        <a href="javascript:;" id="share-discussion">Share</a>
-                                        <input type="text" value={{ route('discussions.show', $discussion->slug) }} id="current-url" class="d-none">
-                                    </span>
-                                    @if ($discussion->user->id === auth()->id())   
-                                    <span class="color-gray ms-2">
-                                        <a href="{{ route('discussions.edit', $discussion->slug) }}">Edit</a>
-                                    </span>
-                                    @endif
+                                    <div class="d-flex align-items-center">
+                                        <span class="color-gray ms-2">
+                                            <a href="javascript:;" id="share-discussion">Share</a>
+                                            <input type="text" value={{ route('discussions.show', $discussion->slug) }} id="current-url" class="d-none">
+                                        </span>
+                                        @if ($discussion->user->id === auth()->id())   
+                                        <span class="color-gray ms-3">
+                                            <a href="{{ route('discussions.edit', $discussion->slug) }}">Edit</a>
+                                        </span>
+                                        
+                                        <form action="{{ route('discussions.destroy', $discussion->slug)}}" class="d-inline-block lh-1" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="color-gray cancel-btn btn border-0" id="delete-discussion">Delete</button>
+                                        </form>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-5 col-lg-3 d-flex justify-content-end">
                                     <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
@@ -160,6 +168,13 @@
                     }
                 })
             });
+
+            $('#delete-discussion').click(function(e) {
+                if(!confirm('Delete the discussion?')){
+                    e.preventDefault();
+                }
+            });
+            
         });
     </script>
 @endsection
