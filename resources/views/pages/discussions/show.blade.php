@@ -99,6 +99,21 @@
                             </div>
                         </div>
                     </div>
+                    @auth
+                    <h3 class="mb-5">Your Reply</h3>    
+                    <div class="card card-discussion">
+                        <form action="{{ route('discussions.answer.store', $discussion->slug)}}" method="POST">
+                            @csrf
+                            <textarea name="answer" id="answer">
+                            {{old('answer')}}
+                            </textarea>
+                            <div class="d-flex justify-content-end align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary rounded-2">Reply</button>
+                            </div>
+                        </form>
+                    </div>
+                    @endauth
+
                     @guest
                         <div class="fw-bold text-center">Please <span class="text-primary"><a href="{{route('auth.login.show')}}">sign in</a></span> or <span class="text-primary"><a href="{{route('auth.signup.show')}}">create an account</a></span> to participate in this discussion.
                         </div>
@@ -124,6 +139,24 @@
 @section('after-script')
     <script>
         $(document).ready(function() {
+            $('#answer').summernote({
+                placeholder: 'Type your reply here',
+                tabsize: 2,
+                height: 220,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['codeview', 'help']]
+                ]
+             });
+
+            $('span.note-icon-caret').remove();
+            $('div.note-modal-footer').height(60);
+
             $('#share-discussion').click(function(){
                 let copyText = $("#current-url")
 
@@ -140,7 +173,7 @@
                 setTimeout(function() {
                     alert.addClass("d-none");
                 }, 1500);
-             })
+             });
 
             $('#discussion-like').click(function() {
                 let isLiked = $(this).data('liked');
@@ -174,7 +207,7 @@
                     e.preventDefault();
                 }
             });
-            
+
         });
     </script>
 @endsection
