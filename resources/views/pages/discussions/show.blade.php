@@ -24,7 +24,7 @@
                                 <span id="discussion-like-count" class="fs-4 color-gray mb-1">{{ $discussion->likeCount }}</span>
                             </div>
                             <div class="col-11">
-                                <p>{!! $discussion->content !!}</p>
+                                <div>{!! $discussion->content !!}</div>
                             </div>
                             <div class="mb-3">
                                 <a href="{{ route('discussions.categories.show', $discussion->category->slug) }}">
@@ -80,15 +80,16 @@
                         <div class="card card-discussion">
                             <div class="row">
                                 <div class="col-1 d-flex flex-column align-items-center">
-                                    <a href="">
-                                        <img src="{{url('assets/img/like.png')}}" alt="like" class="like-icon mb-1">
+                                    <a href="javascript:;" data-id="{{ $answer->id }}" 
+                                        class="answer-like d-flex align-items-center flex-column" data-liked="{{ $answer->liked() }}">
+                                        <img src="{{$answer->liked() ? $likedImage : $notLikedImage}}" alt="like" class="answer-like-icon like-icon mb-1">
+                                        <span class="answer-like-count fs-4 color-gray mb-1">{{ $answer->likeCount }}</span>
                                     </a>
-                                    <span class="fs-4 color-gray mb-1">12</span>
                                 </div>
                                 <div class="col-11">
-                                    <p>
+                                    <div>
                                         {!! $answer->answer !!}
-                                    </p>
+                                    </div>
                                     <div class="row align-items-center justify-content-end">
                                         <div class="col-5 col-lg-3 d-flex justify-content-end">
                                             <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
@@ -115,8 +116,7 @@
                         @endforelse
                         <div class="pt-3">
                             {{$discussionAnswer->links()}}
-                        </div>
-                        
+                        </div> 
                     </div>
                     @auth
                     <h3 class="mb-5">Your Reply</h3>    
@@ -226,6 +226,37 @@
                     e.preventDefault();
                 }
             });
+
+            $('.answer-like').click(function() {
+            let $this = $(this);
+            let id = $this.data('id');
+            let isLiked = $this.data('liked');
+            let likeRoute = isLiked ? '{{ url('') }}/answers/' + id + '/unlike'
+                : '{{ url('') }}/answers/' + id + '/like';
+
+            $.ajax({
+                method: 'POST',
+                url: likeRoute,
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                }
+            })
+            .done(function(res) {
+                if (res.status === 'success') {
+                    console.log(res.data);
+                    $this.find('.answer-like-count').text(res.data.likeCount);
+
+                    if (isLiked) {
+                        $this.find('.answer-like-icon').attr('src', '{{ $notLikedImage }}');
+                    }
+                    else {
+                        $this.find('.answer-like-icon').attr('src', '{{ $likedImage }}');
+                    }
+
+                    $this.data('liked', !isLiked);
+                }
+            })
+        });
 
         });
     </script>
