@@ -54,7 +54,7 @@
                                 <div class="col-5 col-lg-3 d-flex justify-content-end">
                                     <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
                                         <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
-                                        ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="avatar" class="avatar rounded-circle">
+                                        ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{ $discussion->user->username }}" class="avatar rounded-circle">
                                     </a>
                                     <div class="fs-12px lh-1">
                                         <span class="text-primary">
@@ -68,8 +68,15 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="mb-5">Replies</h3>
+
+                    @php
+                        $answerCount = $discussion->answers->count();
+                    @endphp
+
+                    <h3 class="mb-5">{{ $answerCount . ' ' . Str::plural('Reply', $answerCount)}}</h3>
+
                     <div class="mb-5">
+                        @forelse ($discussionAnswer as $answer)
                         <div class="card card-discussion">
                             <div class="row">
                                 <div class="col-1 d-flex flex-column align-items-center">
@@ -79,25 +86,37 @@
                                     <span class="fs-4 color-gray mb-1">12</span>
                                 </div>
                                 <div class="col-11">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At eligendi eum possimus, unde nisi molestias eveniet alias necessitatibus beatae nihil, repudiandae maiores hic temporibus explicabo maxime numquam omnis? Eos, est!</p>
+                                    <p>
+                                        {!! $answer->answer !!}
+                                    </p>
                                     <div class="row align-items-center justify-content-end">
                                         <div class="col-5 col-lg-3 d-flex justify-content-end">
                                             <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
-                                                <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="avatar">
+                                                <img src="{{ filter_var($answer->user->picture, FILTER_VALIDATE_URL) 
+                                        ? $answer->user->picture : Storage::url($answer->user->picture) }}" alt="{{ $answer->user->username }}" class="avatar">
                                             </a>
                                             <div class="fs-12px lh-1">
-                                                <span class="text-primary">
+                                                <span class="{{ $answer->user->username === $discussion->user->username ? 'text-primary' : ''}}">
                                                     <a href="" class="fw-bold d-flex align-items-start text-break mb-1">
-                                                        iwed
+                                                        {{ $answer->user->username }}
                                                     </a>
                                                 </span>
-                                                <span class="color-gray">6 hours ago</span>
+                                                <span class="color-gray">{{ $answer->created_at->diffForHumans()}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @empty
+                        <div class="card card-discussion">
+                            Currently no reply yet.
+                        </div>
+                        @endforelse
+                        <div class="pt-3">
+                            {{$discussionAnswer->links()}}
+                        </div>
+                        
                     </div>
                     @auth
                     <h3 class="mb-5">Your Reply</h3>    
