@@ -91,6 +91,19 @@
                                         {!! $answer->answer !!}
                                     </div>
                                     <div class="row align-items-center justify-content-end">
+                                        <div class="col pt-3">
+                                        @if ($answer->user->id === auth()->id())   
+                                        <span class="color-gray">
+                                            <a href="{{ route('answers.edit', $answer->id) }}">Edit</a>
+                                        </span>
+                                        
+                                        <form action="{{ route('answers.destroy', $answer->id)}}" class="d-inline-block lh-1" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="color-gray cancel-btn btn border-0" id="delete-discussion">Delete</button>
+                                        </form>
+                                        @endif
+                                        </div>
                                         <div class="col-5 col-lg-3 d-flex justify-content-end">
                                             <a href="" class="card-discussion-author flex-shrink-0 rounded-circle overflow-hidden me-1">
                                                 <img src="{{ filter_var($answer->user->picture, FILTER_VALIDATE_URL) 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Discussion;
 use App\Models\Answer;
 use App\Http\Requests\Answer\StoreRequest;
+use App\Http\Requests\Answer\UpdateRequest;
 
 class AnswerController extends Controller
 {
@@ -31,27 +32,54 @@ class AnswerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $answer = Answer::find($id);
+
+        if(!$answer){
+            return abort(404);
+        }
+
+        $isOwnedByUser = $answer->user_id == auth()->id();
+
+        if(!$isOwnedByUser){
+            return abort(404);
+        }
+
+        return response()->view('pages.answers.form', [
+            'answer' => $answer
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
-        //
+        $answer = Answer::find($id);
+
+        if(!$answer){
+            return abort(404);
+        }
+
+        $isOwnedByUser = $answer->user_id == auth()->id();
+
+        if(!$isOwnedByUser){
+            return abort(404);
+        }
+
+        $validated = $request->validated();
+
+        $update = $answer->update($validated);
+
+        if ($update) {
+            session()->flash('notif.success', 'Your reply updated successfully');
+            return redirect()->route('discussions.show', $answer->discussion->slug);
+        }
+
+        return abort(500);
     }
 
     /**

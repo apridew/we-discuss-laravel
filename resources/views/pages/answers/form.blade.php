@@ -7,7 +7,7 @@
                 <div class="d-flex align-items-center">
                     <div class="d-flex">
                         <div class="fs-2 fw-bold me-2 mb-0">
-                            Answer a Question
+                            Edit your reply
                         </div>
                     </div>
                 </div>
@@ -17,14 +17,17 @@
                     <div class="card card-discussion mb-5">
                         <div class="row">
                             <div class="col-12">
-                                <form action="" method="POST">
+                                <form action="{{ route('answers.update', $answer->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
                                     <div class="mb-3">
-                                        <label for="answer" class="form-label fw-bold">Answer</label>
-                                        <textarea name="answer" class="form-control" id="answer" cols="30" rows="10"></textarea>
+                                        <label for="answer" class="form-label">Edit below here :</label>
+                                        <textarea name="answer" class="form-control" id="answer">{{ $answer->answer ?? old('answer')}}</textarea>
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
                                         <button type="submit" class="btn btn-primary rounded-2 me-4">Post</button>
-                                        <a href="" class="cancel-btn">Cancel</a>
+                                        <a href="{{route('discussions.show', $answer->discussion->slug)}}" class="cancel-btn">Cancel</a>
                                     </div>
                                 </form>
                             </div>

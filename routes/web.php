@@ -26,7 +26,9 @@ Route::middleware('auth')->group(function () {
 
         Route::post('discussions/{discussion}/answer', 'AnswerController@store')
             ->name('discussions.answer.store');
-
+            
+        Route::resource('answers', AnswerController::class)
+            ->only(['edit', 'update', 'destroy']);
         Route::post('answers/{answer}/like', 'LikeController@answerLike')->name('answers.like.like');
         Route::post('answers/{answer}/unlike', 'LikeController@answerUnlike')->name('answers.like.unlike');
     });
@@ -52,10 +54,6 @@ Route::namespace('App\Http\Controllers\Auth')->group(function () {
     Route::get('signup', 'SignUpController@show')->name('auth.signup.show');
     Route::post('signup', 'SignUpController@signup')->name('auth.signup.signup');
 });
-
-Route::get('answers/1', function () {
-    return view('pages.answers.form');
-})->name('answers.edit');
 
 Route::get('users/apridew', function () {
     return view('pages.users.show');
