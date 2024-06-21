@@ -100,7 +100,7 @@
                                         <form action="{{ route('answers.destroy', $answer->id)}}" class="d-inline-block lh-1" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="color-gray cancel-btn btn border-0" id="delete-discussion">Delete</button>
+                                            <button type="submit" class="delete-answer color-gray cancel-btn btn border-0">Delete</button>
                                         </form>
                                         @endif
                                         </div>
@@ -235,7 +235,13 @@
             });
 
             $('#delete-discussion').click(function(e) {
-                if(!confirm('Delete the discussion?')){
+                if(!confirm('Are you sure you want to delete this discussion?')){
+                    e.preventDefault();
+                }
+            });
+
+            $('.delete-answer').click(function(e) {
+                if(!confirm('Are you sure you want to delete this reply?')){
                     e.preventDefault();
                 }
             });
@@ -269,8 +275,8 @@
                     $this.data('liked', !isLiked);
                 }
             })
-        });
 
+        });
         });
     </script>
 @endsection
