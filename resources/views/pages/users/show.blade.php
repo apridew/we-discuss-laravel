@@ -6,15 +6,15 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                 <div class="d-flex mb-4">
-                    <div class="avatar-wrapper rounded-circle overflow-hidden flex-shrink-0 me-4 bg-white">
-                        <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid">
+                    <div class="avatar-wrapper d-flex rounded-circle overflow-hidden flex-shrink-0 me-4 bg-white">
+                        <img src="{{$picture}}" alt="avatar" class="img-fluid text-center">
                     </div>
                     <div class="mb-4">
                         <div class="fs-2 fw-bold mb-1 lh-1 text-break">
-                            apridew
+                            {{$user->username}}
                         </div>
                         <div class="color-gray">
-                            Member since 1 year ago
+                            Member since {{ $user->created_at->diffForHumans()}}
                         </div>
                     </div>
                 </div>
@@ -26,107 +26,78 @@
             <div class="col-12 col-lg-8">
                 <div class="mb-5">
                     <h2 class="mb-3">My discussions</h2>
-                    <div>
+                    <div> 
+                    @forelse ($discussions as $discussion)
                         <div class="card card-discussion">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        5 Likes
-                                    </div>
-                                    <div class="text-nowrap color-gray">
-                                        11 Answers
-                                    </div>
+                        <div class="row">
+                            <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
+                                <div class="text-nowrap me-2 me-lg-0">
+                                    {{$discussion->like_count . ' ' . Str::plural('Like', $discussion->like_count)}}
                                 </div>
-                                <div class="col-12 col-lg-10">
-                                    <a href="{{route('discussions.show')}}">
-                                        <h3>How to add a custom validation in Laravel?</h3>
-                                    </a>
-                                    <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "...</p>
-                                    <div class="row">
-                                        <div class="col me-1 me-lg-2">
-                                            <a href="">
-                                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
+                                <div class="text-nowrap color-gray">
+                                    {{$discussion->answers->count() . ' ' . Str::plural('Reply', $discussion->answers->count())}}
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-10">
+                                <a href="{{route('discussions.show', $discussion->slug)}}">
+                                    <h3>{{$discussion->title}}</h3>
+                                </a>
+                                <p>{!!$discussion->content_preview!!}</p>
+                                <div class="row">
+                                    <div class="col me-1 me-lg-2">
+                                        <a href="{{ route('discussions.categories.show', $discussion->category->slug) }}">
+                                            <span class="badge rounded-pill text-bg-light">{{$discussion->category->name}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-5 col-lg-4">
+                                        <div class="avatar-sm-wrapper d-inline-block">
+                                            <a href="{{route('users.show', $discussion->user->username)}}" class="me-1">
+                                                <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
+                                                ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle">
                                             </a>
                                         </div>
-                                        <div class="col-5 col-lg-4">
-                                            <div class="avatar-sm-wrapper d-inline-block">
-                                                <a href="" class="me-1">
-                                                    <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid rounded-circle">
-                                                </a>
-                                            </div>
-                                            <span class="fs-12px">
-                                                <a href="" class="me-4 fw-bold">apridew</a>
-                                                <span>8 hours ago</span>
-                                            </span>
-                                        </div>
+                                        <span class="fs-12px">
+                                            <a href="{{route('users.show', $discussion->user->username)}}" class="me-4 fw-bold">{{$discussion->user->username}}</a>
+                                            <span>{{$discussion->created_at->diffForHumans()}}</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+                        </div>                            
+                    @empty
                         <div class="card card-discussion">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 mb-1 mb-lg-0 d-flex flex-row flex-lg-column align-items-end">
-                                    <div class="text-nowrap me-2 me-lg-0">
-                                        5 Likes
-                                    </div>
-                                    <div class="text-nowrap color-gray">
-                                        11 Answers
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-10">
-                                    <a href="{{route('discussions.show')}}">
-                                        <h3>How to add a custom validation in Laravel?</h3>
-                                    </a>
-                                    <p>I am working on a blogging application in Laravel 8. There are 4 user roles, among which, the "...</p>
-                                    <div class="row">
-                                        <div class="col me-1 me-lg-2">
-                                            <a href="">
-                                                <span class="badge rounded-pill text-bg-light">Eloquent</span>
-                                            </a>
-                                        </div>
-                                        <div class="col-5 col-lg-4">
-                                            <div class="avatar-sm-wrapper d-inline-block">
-                                                <a href="" class="me-1">
-                                                    <img src="{{url('assets/img/avatar.png')}}" alt="avatar" class="img-fluid rounded-circle">
-                                                </a>
-                                            </div>
-                                            <span class="fs-12px">
-                                                <a href="" class="me-4 fw-bold">apridew</a>
-                                                <span>8 hours ago</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            Currently no discussion yet.
                         </div>
+                    @endforelse
+                    {{$discussions->appends(['answers' => $answers->currentPage()])->links()}}
                     </div>
                 </div>
                 <div>
                     <h2 class="mb-3">My Answers</h2>
                     <div>
+                        @forelse ($answers as $answer)
                         <div class="card card-discussion">
                             <div class="row align-items-center">
                                 <div class="col-2 col-lg-1 text-center">
-                                    12
+                                    {{ $answer->like_count }}
                                 </div>
                                 <div class="col">
                                     <span>Replied to</span>
-                                    <span class="fw-bold text-primary">How to add a custom validation in Laravel?</span>
+                                    <span class="fw-bold text-primary">
+                                        <a href="{{ route('discussions.show', $answer->discussion->slug) }}">
+                                            {{ $answer->discussion->title }}
+                                        </a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                        @empty
                         <div class="card card-discussion">
-                            <div class="row align-items-center">
-                                <div class="col-2 col-lg-1 text-center">
-                                    12
-                                </div>
-                                <div class="col">
-                                    <span>Replied to</span>
-                                    <span class="fw-bold text-primary">How to add a custom validation in Laravel?</span>
-                                </div>
-                            </div>
+                            Currently no reply yet.
                         </div>
+                        @endforelse
+                        {{$answers->appends(['discussions' => $discussions->currentPage()])->links()}}
                     </div>
                 </div>
             </div>

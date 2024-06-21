@@ -21,7 +21,7 @@
                 @endguest
                 @auth
                 <div class="mb-4">
-                    <a class="btn btn-primary" href="{{route('discussions.create')}}">Create Discussion</a>
+                    <a class="btn btn-primary rounded-2" href="{{route('discussions.create')}}">Create Discussion</a>
                 </div>
                 @endauth
                 <div class="row">
