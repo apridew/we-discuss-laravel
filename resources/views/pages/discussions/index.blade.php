@@ -49,10 +49,10 @@
                                             </a>
                                         </div>
                                         <div class="col-5 col-lg-4">
-                                            <div class="avatar-sm-wrapper d-inline-block">
+                                            <div class="d-inline-block">
                                                 <a href="{{route('users.show', $discussion->user->username)}}" class="me-1">
                                                     <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
-                                                    ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle">
+                                                    ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle avatar">
                                                 </a>
                                             </div>
                                             <span class="fs-12px">

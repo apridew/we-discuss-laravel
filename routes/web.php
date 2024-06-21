@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
+    Route::namespace('App\Http\Controllers\My')->group(function() {
+        Route::resource('users', UserController::class)->only(['edit', 'update']);
+    });
+
     Route::namespace('App\Http\Controllers')->group(function () {
         Route::resource('discussions', DiscussionController::class)
             ->only(['create', 'store', 'edit', 'update', 'destroy']);
@@ -58,7 +62,3 @@ Route::namespace('App\Http\Controllers\Auth')->group(function () {
 Route::namespace('App\Http\Controllers\My')->group(function() {
     Route::resource('users', UserController::class)->only(['show']);
 });
-
-Route::get('users/apridew/edit', function () {
-    return view('pages.users.form');
-})->name('users.edit');

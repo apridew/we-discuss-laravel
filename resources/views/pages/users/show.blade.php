@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                 <div class="d-flex mb-4">
-                    <div class="avatar-wrapper d-flex rounded-circle overflow-hidden flex-shrink-0 me-4 bg-white">
+                    <div class="avatar-wrapper d-flex rounded-circle justify-content-center overflow-hidden flex-shrink-0 me-4 bg-white">
                         <img src="{{$picture}}" alt="avatar" class="img-fluid text-center">
                     </div>
                     <div class="mb-4">
@@ -21,6 +21,11 @@
                 <div>
                     <input type="text" id="current-url" class="d-none" value="{{ request()->url()}}">
                     <a href="javascript:;" class="btn btn-primary rounded-3 me-4" id="share-profile">Share</a>
+                    @auth
+                        @if ($user->id === auth()->id())
+                            <a class="cancel-btn mt-2" href="{{route('users.edit', $user->username)}}">Edit Profile</a>
+                        @endif
+                    @endauth
                 </div>
             </div>
             <div class="col-12 col-lg-8">
@@ -50,10 +55,10 @@
                                         </a>
                                     </div>
                                     <div class="col-5 col-lg-4">
-                                        <div class="avatar-sm-wrapper d-inline-block">
+                                        <div class="d-inline-block">
                                             <a href="{{route('users.show', $discussion->user->username)}}" class="me-1">
                                                 <img src="{{ filter_var($discussion->user->picture, FILTER_VALIDATE_URL) 
-                                                ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle">
+                                                ? $discussion->user->picture : Storage::url($discussion->user->picture) }}" alt="{{$discussion->user->username}}" class="img-fluid rounded-circle avatar">
                                             </a>
                                         </div>
                                         <span class="fs-12px">
@@ -80,7 +85,7 @@
                         <div class="card card-discussion">
                             <div class="row align-items-center">
                                 <div class="col-2 col-lg-1 text-center">
-                                    {{ $answer->like_count }}
+                                    {{$answer->like_count . ' ' . Str::plural('Like', $answer->like_count)}}
                                 </div>
                                 <div class="col">
                                     <span>Replied to</span>
