@@ -14,7 +14,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'discussions.index' ? 'active' : ''}}" aria-current="page" href="{{route('discussions.index')}}">Discussions</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{route('home')}}">About Us</a>
+                <a class="nav-link" aria-current="page" href="{{route('home')}}#about-us">About Us</a>
               </li>
             </ul>
             <form class="d-flex" role="search" action="{{route('discussions.index')}}" method="GET">

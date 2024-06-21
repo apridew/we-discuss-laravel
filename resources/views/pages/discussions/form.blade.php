@@ -7,7 +7,11 @@
                 <div class="d-flex align-items-center">
                     <div class="d-flex">
                         <div class="fs-2 fw-bold me-2 mb-0">
-                            Ask a Question
+                            @if (isset($discussion))
+                                Edit Question
+                            @else
+                                Ask a Question
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -57,7 +61,13 @@
                                         @enderror
                                     </div>
                                     <div class="d-flex justify-content-end align-items-center">
-                                        <button type="submit" class="btn btn-primary rounded-2 me-4">Post</button>
+                                        <button type="submit" class="btn btn-primary rounded-2 me-4">
+                                            @if (isset($discussion))
+                                                Update
+                                            @else
+                                                Post
+                                            @endif
+                                        </button>
                                         <a href="{{route('discussions.index')}}" class="color-gray">Cancel</a>
                                     </div>
                                 </form>
