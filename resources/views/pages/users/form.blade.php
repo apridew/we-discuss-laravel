@@ -12,7 +12,7 @@
                         <div class="d-flex flex-column flex-md-row mb-4">
                             <div class="edit-avatar-wrapper mb-3 mb-md-0 mx-auto mx-md-0">
                                 <div class="avatar-wrapper d-flex justify-content-center rounded-circle overflow-hidden flex-shrink-0 me-4 bg-white">
-                                    <img id="avatar" src="{{$picture}}" alt="avatar" class="img-fluid">
+                                    <img id="avatar" src="{{asset($picture)}}" alt="avatar" class="img-fluid">
                                 </div>
                                 <label for="picture" class="btn p-0 edit-avatar-show rounded-circle">
                                     <img src="{{url('assets/img/edit.png')}}" alt="edit">
