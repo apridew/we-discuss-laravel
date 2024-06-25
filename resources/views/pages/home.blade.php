@@ -54,8 +54,8 @@
                   <div class="col-5 col-lg-7">
                     <div class="d-inline-block">
                       <a href="{{route('users.show', $itemLatestDiscussion->user->username)}}" class="me-1">
-                          <img src="{{ asset(filter_var($itemLatestDiscussion->user->picture, FILTER_VALIDATE_URL) 
-                          ? $itemLatestDiscussion->user->picture : Storage::url($itemLatestDiscussion->user->picture)) }}" alt="{{$itemLatestDiscussion->user->username}}" class="img-fluid rounded-circle avatar">
+                          <img src="{{ filter_var($itemLatestDiscussion->user->picture, FILTER_VALIDATE_URL) 
+                          ? $itemLatestDiscussion->user->picture : Storage::url($itemLatestDiscussion->user->picture) }}" alt="{{$itemLatestDiscussion->user->username}}" class="img-fluid rounded-circle avatar">
                       </a>
                   </div>
                     <span class="fs-12px"><a href="{{route('users.show', $itemLatestDiscussion->user->username)}}" class="me-1 fw-bold">{{$itemLatestDiscussion->user->username}}</a>

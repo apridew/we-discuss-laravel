@@ -7,7 +7,7 @@
             <div class="col-12 col-lg-4 mb-5 mb-lg-0">
                 <div class="d-flex mb-4">
                     <div class="avatar-wrapper d-flex rounded-circle justify-content-center overflow-hidden flex-shrink-0 me-4 bg-white">
-                        <img src="{{asset($picture)}}" alt="avatar" class="img-fluid text-center">
+                        <img src="{{$picture}}" alt="avatar" class="img-fluid text-center">
                     </div>
                     <div class="mb-4">
                         <div class="fs-2 fw-bold mb-1 lh-1 text-break">
