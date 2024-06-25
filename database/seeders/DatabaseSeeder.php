@@ -14,9 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'username' => 'test_user',
-            'email' => 'test_user@test.com',
+        $username = 'userTest';
+
+        \App\Models\User::create([
+            'username' => 'userTest',
+            'email' => 'userTest@test.com',
+            'password' => static::$password ??= Hash::make('password'),
+            'picture' => config('app.avatar_generator_url').$username,
         ]);
 
         $this->call([
