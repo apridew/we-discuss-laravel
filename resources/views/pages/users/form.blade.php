@@ -24,6 +24,7 @@
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                             <div class="mb-3">
+                                <h4 class="mb-3">Change Username</h4>
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control @error('username') is-invalid @enderror" 
                                     id="username" name="username" value="{{ old('username', $user->username) }}" 
@@ -33,10 +34,11 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <h4 class="mt-5 mb-3">Change Password</h4>
+                                <label for="password" class="form-label">New Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" 
                                     id="password" name="password">
-                                <div class="fs-12px color-gray">
+                                <div class="fs-12px text-danger">
                                     Empty this if you don't want to change your password
                                 </div>
                                 @error('password')
@@ -47,7 +49,7 @@
                                 <label for="password_confirmation" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" 
                                     id="password_confirmation" name="password_confirmation">
-                                <div class="fs-12px color-gray">
+                                <div class="fs-12px text-danger">
                                     Empty this if you don't want to change your password
                                 </div>
                                 @error('password_confirmation')
